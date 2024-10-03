@@ -10,12 +10,18 @@ namespace BookStoreAPI.Database
 
         public DbSet<User> Users { get; set; }
         public DbSet<Book> Books { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // Seeding 10 books into the database
+            modelBuilder.Entity<Cart>()
+                .HasMany(c => c.Items)
+                .WithOne()
+                .HasForeignKey(ci => ci.CartId);
+
             modelBuilder.Entity<Book>().HasData(
                 new Book
                 {
