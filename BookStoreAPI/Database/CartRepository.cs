@@ -70,6 +70,13 @@ namespace BookStoreAPI.Database
                 await _context.SaveChangesAsync();
             }
         }
+        public async Task<IEnumerable<CartItem>> GetCartItemsByUserIdAsync(int userId)
+        {
+            var cart = await _context.Carts
+                                     .Include(c => c.Items)
+                                     .FirstOrDefaultAsync(c => c.UserId == userId);
+            return cart?.Items ?? new List<CartItem>();
+        }
     }
 
     public interface ICartRepository
@@ -80,5 +87,6 @@ namespace BookStoreAPI.Database
         Task RemoveCartItemAsync(int cartItemId);
         Task ClearCartAsync(int userId);
         Task UpdateCartItemQuantityAsync(int cartItemId, int quantity);
+        Task<IEnumerable<CartItem>> GetCartItemsByUserIdAsync(int userId);
     }
 }

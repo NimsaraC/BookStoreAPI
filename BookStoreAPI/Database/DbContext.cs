@@ -12,6 +12,8 @@ namespace BookStoreAPI.Database
         public DbSet<Book> Books { get; set; }
         public DbSet<Cart> Carts { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -21,6 +23,9 @@ namespace BookStoreAPI.Database
                 .HasMany(c => c.Items)
                 .WithOne()
                 .HasForeignKey(ci => ci.CartId);
+
+            modelBuilder.Entity<OrderItem>()
+                .HasKey(oi => new { oi.Id, oi.OrderId });
 
             modelBuilder.Entity<Book>().HasData(
                 new Book
