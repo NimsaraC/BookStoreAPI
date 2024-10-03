@@ -93,11 +93,47 @@ namespace BookStoreAPI.Services
             }).ToList();
         }
 
+        public async Task<List<OrderDto>> GetAllOrdersAsync()
+        {
+            var orders = await _orderRepo.GetAllOrdersAsync();
+            return orders.Select(o => new OrderDto
+            {
+                Id = o.Id,
+                UserId = o.UserId,
+                DateTime = o.DateTime,
+                TotalAmount = o.TotalAmount,
+                AddressLine1 = o.AddressLine1,
+                AddressLine2 = o.AddressLine2,
+                City = o.City,
+                Region = o.Region,
+                Status = o.Status,
+                Items = o.Items.Select(oi => new OrderItemDto
+                {
+                    BookId = oi.BookId,
+                    Quantity = oi.Quantity,
+                    UnitPrice = oi.UnitPrice
+                }).ToList()
+            }).ToList();
+        }
+
+        public async Task UpdateOrderStatusAsync(int orderId, string status)
+        {
+            var order = await _orderRepo.GetOrderByIdAsync(orderId);
+            if (order == null)
+            {
+                throw new Exception("Order not found.");
+            }
+            await _orderRepo.UpdateOrderStatusAsync(orderId, status);
+        }
+
+
     }
 
     public interface IOrderService
     {
         Task<OrderDto> CreateOrderAsync(CreateOrderDto createOrderDto);
         Task<List<OrderDto>> GetOrdersByUserIdAsync(int userId);
+        Task<List<OrderDto>> GetAllOrdersAsync();
+        Task UpdateOrderStatusAsync(int orderId, string status);
     }
 }

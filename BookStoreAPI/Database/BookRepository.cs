@@ -50,6 +50,17 @@ namespace BookStoreAPI.Database
                 await _context.SaveChangesAsync();
             }
         }
+        public async Task UpdateBookStockAsync(int bookId, int stock)
+        {
+            var book = await _context.Books.FindAsync(bookId);
+            if (book != null)
+            {
+                book.Stock = stock;
+                _context.Books.Update(book);
+                await _context.SaveChangesAsync();
+            }
+        }
+
     }
 
     public interface IBookRepository
@@ -59,5 +70,6 @@ namespace BookStoreAPI.Database
         Task AddBookAsync(Book book);
         Task UpdateBookAsync(Book book);
         Task DeleteBookAsync(int id);
+        Task UpdateBookStockAsync(int bookId, int stock);
     }
 }

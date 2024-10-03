@@ -82,5 +82,25 @@ namespace BookStoreAPI.Controllers
             await _bookService.DeleteBookAsync(id);
             return NoContent();
         }
+
+        [HttpPut("{bookId}/stock")]
+        public async Task<IActionResult> UpdateBookStock(int bookId, [FromBody] int stock)
+        {
+            if (stock < 0)
+            {
+                return BadRequest("Stock cannot be negative.");
+            }
+
+            try
+            {
+                await _bookService.UpdateBookStockAsync(bookId, stock);
+                return Ok("Book stock updated successfully.");
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
     }
 }

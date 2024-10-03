@@ -14,6 +14,7 @@ namespace BookStoreAPI.Services
         Task AddNewBookAsync(BookCreateDto book);
         Task UpdateBookAsync(BookDto book);
         Task DeleteBookAsync(int id);
+        Task UpdateBookStockAsync(int bookId, int stock);
     }
 
     public class BookService : IBookService
@@ -87,5 +88,21 @@ namespace BookStoreAPI.Services
         {
             await _bookRepo.DeleteBookAsync(id);
         }
+        public async Task UpdateBookStockAsync(int bookId, int stock)
+        {
+            var book = await _bookRepo.GetBookByIdAsync(bookId);
+            if (book == null)
+            {
+                throw new Exception("Book not found.");
+            }
+
+            if (stock < 0)
+            {
+                throw new ArgumentException("Stock cannot be negative.");
+            }
+
+            await _bookRepo.UpdateBookStockAsync(bookId, stock);
+        }
+
     }
 }
