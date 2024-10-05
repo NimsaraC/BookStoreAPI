@@ -33,6 +33,7 @@ namespace BookStoreAPI.Services
                 Email = user.Email,
                 Name = user.Name,
                 Password = user.Password,
+                Role = user.Role,
             };
         }
 
@@ -57,7 +58,8 @@ namespace BookStoreAPI.Services
             { 
                 Email = userDto.Email,
                 Name = userDto.Name,
-                Password = userDto.Password 
+                Password = userDto.Password,
+                Role = userDto.Role,
             };
             await _userReo.AddUserAsync(user);
         }
