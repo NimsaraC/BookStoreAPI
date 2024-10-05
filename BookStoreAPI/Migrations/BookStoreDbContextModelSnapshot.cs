@@ -274,12 +274,15 @@ namespace BookStoreAPI.Migrations
             modelBuilder.Entity("BookStoreAPI.Models.OrderItem", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BookId")
                         .HasColumnType("int");
 
                     b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("BookId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
@@ -288,7 +291,7 @@ namespace BookStoreAPI.Migrations
                     b.Property<double>("UnitPrice")
                         .HasColumnType("float");
 
-                    b.HasKey("Id", "OrderId");
+                    b.HasKey("Id");
 
                     b.HasIndex("OrderId");
 

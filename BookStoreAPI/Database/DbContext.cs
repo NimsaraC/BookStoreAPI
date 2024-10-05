@@ -24,8 +24,13 @@ namespace BookStoreAPI.Database
                 .WithOne()
                 .HasForeignKey(ci => ci.CartId);
 
-            modelBuilder.Entity<OrderItem>()
-                .HasKey(oi => new { oi.Id, oi.OrderId });
+            /*modelBuilder.Entity<OrderItem>()
+                .HasKey(oi => new { oi.Id, oi.OrderId });*/
+
+            modelBuilder.Entity<Order>()
+                .HasMany(c => c.Items)
+                .WithOne()
+                .HasForeignKey(ci => ci.OrderId);
 
             modelBuilder.Entity<Book>().HasData(
                 new Book

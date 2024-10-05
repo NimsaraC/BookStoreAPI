@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookStoreAPI.Migrations
 {
     [DbContext(typeof(BookStoreDbContext))]
-    [Migration("20241003212507_initialcreate")]
+    [Migration("20241005203631_initialcreate")]
     partial class initialcreate
     {
         /// <inheritdoc />
@@ -277,12 +277,15 @@ namespace BookStoreAPI.Migrations
             modelBuilder.Entity("BookStoreAPI.Models.OrderItem", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BookId")
                         .HasColumnType("int");
 
                     b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("BookId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
@@ -291,7 +294,7 @@ namespace BookStoreAPI.Migrations
                     b.Property<double>("UnitPrice")
                         .HasColumnType("float");
 
-                    b.HasKey("Id", "OrderId");
+                    b.HasKey("Id");
 
                     b.HasIndex("OrderId");
 
@@ -315,6 +318,10 @@ namespace BookStoreAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
