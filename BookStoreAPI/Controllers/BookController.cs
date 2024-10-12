@@ -65,7 +65,7 @@ namespace BookStoreAPI.Controllers
             existingBook.Publisher = book.Publisher;
             existingBook.PublicationDate = book.PublicationDate;
 
-            await _bookService.UpdateBookAsync(existingBook);
+            await _bookService.UpdateBookAsync(id,existingBook);
             return Ok(existingBook);
         }
 

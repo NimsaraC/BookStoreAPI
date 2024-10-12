@@ -34,9 +34,23 @@ namespace BookStoreAPI.Database
         }
 
         // Update Book
-        public async Task UpdateBookAsync(Book book)
+        public async Task UpdateBookAsync(int id, Book book)
         {
-            _context.Books.Update(book);
+            var existingBook = await _context.Books.FindAsync(id);
+            if(existingBook != null)
+            {
+                existingBook.Id = id;
+                existingBook.Title = book.Title;
+                existingBook.Description = book.Description;
+                existingBook.Author = book.Author;
+                existingBook.ISBN = book.ISBN;
+                existingBook.Stock = book.Stock;
+                existingBook.Price = book.Price;
+                existingBook.PublicationDate = book.PublicationDate;
+                existingBook.Publisher = book.Publisher;
+
+            }
+            _context.Books.Update(existingBook);
             await _context.SaveChangesAsync();
         }
 
@@ -68,7 +82,7 @@ namespace BookStoreAPI.Database
         Task<Book> GetBookByIdAsync(int id);
         Task<IEnumerable<Book>> GetAllBooksAsync();
         Task AddBookAsync(Book book);
-        Task UpdateBookAsync(Book book);
+        Task UpdateBookAsync(int id,Book book);
         Task DeleteBookAsync(int id);
         Task UpdateBookStockAsync(int bookId, int stock);
     }
