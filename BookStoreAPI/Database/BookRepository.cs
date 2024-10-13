@@ -48,6 +48,7 @@ namespace BookStoreAPI.Database
                 existingBook.Price = book.Price;
                 existingBook.PublicationDate = book.PublicationDate;
                 existingBook.Publisher = book.Publisher;
+                existingBook.ImagePath = book.ImagePath;
 
             }
             _context.Books.Update(existingBook);

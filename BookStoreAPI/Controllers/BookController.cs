@@ -56,6 +56,7 @@ namespace BookStoreAPI.Controllers
                 return NotFound();
             }
 
+            existingBook.ImagePath = book.ImagePath;
             existingBook.Title = book.Title;
             existingBook.Description = book.Description;
             existingBook.Author = book.Author;

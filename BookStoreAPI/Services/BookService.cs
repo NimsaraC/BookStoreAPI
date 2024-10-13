@@ -43,6 +43,7 @@ namespace BookStoreAPI.Services
                 Publisher = book.Publisher,
                 Stock = book.Stock,
                 Title = book.Title,
+                ImagePath = book.ImagePath,
             };
         }
 
@@ -57,13 +58,14 @@ namespace BookStoreAPI.Services
             var book = new Book
             {
                 Title = bookDto.Title,
-                Stock= bookDto.Stock,
-                Publisher= bookDto.Publisher,
-                PublicationDate= bookDto.PublicationDate,
+                Stock = bookDto.Stock,
+                Publisher = bookDto.Publisher,
+                PublicationDate = bookDto.PublicationDate,
                 Author = bookDto.Author,
-                Description= bookDto.Description,
-                ISBN= bookDto.ISBN,
+                Description = bookDto.Description,
+                ISBN = bookDto.ISBN,
                 Price = bookDto.Price,
+                ImagePath = bookDto.ImagePath,
             };
             await _bookRepo.AddBookAsync(book);
         }
@@ -100,6 +102,7 @@ namespace BookStoreAPI.Services
                 Description = bookDto.Description,
                 ISBN = bookDto.ISBN,
                 Price = bookDto.Price,
+                ImagePath = bookDto.ImagePath,
             };
             await _bookRepo.UpdateBookAsync(id,book);
         }

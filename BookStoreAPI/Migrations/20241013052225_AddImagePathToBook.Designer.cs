@@ -4,6 +4,7 @@ using BookStoreAPI.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookStoreAPI.Migrations
 {
     [DbContext(typeof(BookStoreDbContext))]
-    partial class BookStoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241013052225_AddImagePathToBook")]
+    partial class AddImagePathToBook
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -219,9 +222,6 @@ namespace BookStoreAPI.Migrations
                     b.Property<int>("CartId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ImagePath")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
@@ -287,9 +287,6 @@ namespace BookStoreAPI.Migrations
 
                     b.Property<int>("BookId")
                         .HasColumnType("int");
-
-                    b.Property<string>("ImagePath")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("OrderId")
                         .HasColumnType("int");

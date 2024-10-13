@@ -40,7 +40,9 @@ namespace BookStoreAPI.Services
                 {
                     BookId = ci.BookId,
                     Quantity = ci.Quantity,
-                    UnitPrice = ci.UnitPrice
+                    UnitPrice = ci.UnitPrice,
+                    ImagePath = ci.ImagePath,
+                    
                 }).ToList()
             };
 
@@ -65,7 +67,8 @@ namespace BookStoreAPI.Services
                 {
                     BookId = oi.BookId,
                     Quantity = oi.Quantity,
-                    UnitPrice = oi.UnitPrice
+                    UnitPrice = oi.UnitPrice,
+                    ImagePath = oi.ImagePath,
                 }).ToList()
             };
         }
@@ -88,7 +91,8 @@ namespace BookStoreAPI.Services
                 {
                     BookId = oi.BookId,
                     Quantity = oi.Quantity,
-                    UnitPrice = oi.UnitPrice
+                    UnitPrice = oi.UnitPrice,
+                    ImagePath = oi.ImagePath,
                 }).ToList()
             }).ToList();
         }
@@ -111,7 +115,8 @@ namespace BookStoreAPI.Services
                 {
                     BookId = oi.BookId,
                     Quantity = oi.Quantity,
-                    UnitPrice = oi.UnitPrice
+                    UnitPrice = oi.UnitPrice,
+                    ImagePath = oi.ImagePath,
                 }).ToList()
             }).ToList();
         }

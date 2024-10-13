@@ -49,6 +49,7 @@ namespace BookStoreAPI.Services
                 BookId = cartItemDto.BookId,
                 Quantity = cartItemDto.Quantity,
                 UnitPrice = cartItemDto.UnitPrice,
+                ImagePath = cartItemDto.ImagePath,
             };
 
             await _cartRepo.AddCartItemAsync(cartItem);
